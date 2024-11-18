@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'chilax';
+  src: url('./fonts/Chillax-Medium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+body {
+  font-family: 'chilax', sans-serif;
+}
