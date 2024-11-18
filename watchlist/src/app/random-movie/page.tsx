@@ -1,7 +1,5 @@
 "use client";
 
-import Navbar from "../components/navbar";
-import Footer from "../components/footer";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -95,7 +93,7 @@ const RandomMovie: React.FC = () => {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
+        // const errorData = await response.json();
         toast.error('Error adding to watchlist!');
         return;
       }

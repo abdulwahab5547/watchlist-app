@@ -65,7 +65,7 @@ function ProfileOverlay({ isVisible, onClose }: ProfileOverlayProps) {
     };
 
     fetchUserAvatar();
-  }, [backendUrl]);
+  }, [backendUrl, setSelectedAvatar, setName]);
 
   // Function to send selected avatar number to backend
   const handleAvatarSelection = async (avatarId: number) => {

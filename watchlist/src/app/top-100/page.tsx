@@ -44,14 +44,13 @@ function WatchList() {
                 console.log(data);
             } catch (err: any) {
                 setError(err.message);
-            }
-            finally {
+            } finally {
                 setLoading(false);
             }
         };
-
+    
         fetchMovies();
-    }, []);
+    }, [apiKey]);
 
     return (
         <div>

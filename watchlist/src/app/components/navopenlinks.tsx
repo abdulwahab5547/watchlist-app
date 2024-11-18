@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 interface NavOpenLinksProps {
@@ -9,17 +10,18 @@ const NavOpenLinks: React.FC<NavOpenLinksProps> = ({ closeMenu }) => {
     return(
         <ul className="flex flex-col gap-4 text-lg">
             <li>
-                <a
-                    href="/"
-                    onClick={closeMenu}
-                    className={
-                        currentPath === "/"
-                            ? "underline decoration-orange underline-offset-4"
-                            : ""
-                    }
-                >
-                    Home
-                </a>
+                <Link href="/">
+                    <p
+                        onClick={closeMenu}
+                        className={
+                            currentPath === "/"
+                                ? "underline decoration-orange underline-offset-4"
+                                : ""
+                        }
+                    >
+                        Home
+                    </p>
+                </Link>
             </li>
             <li>
                 <a

@@ -8,17 +8,18 @@ import ProfileOverlay from "./profileoverlay";
 import NavLinks from "./navlinks";
 import NavOpenLinks from "./navopenlinks";
 import SearchOverlay from "./searchoverlay";
+import Link from "next/link";
 
 // Dynamically import avatar images based on selectedAvatar
 const avatarImports = {
-    1: require("@/app/assets/avatars/1.svg"),
-    2: require("@/app/assets/avatars/2.svg"),
-    3: require("@/app/assets/avatars/3.svg"),
-    4: require("@/app/assets/avatars/4.svg"),
-    5: require("@/app/assets/avatars/5.svg"),
-    6: require("@/app/assets/avatars/6.svg"),
-    7: require("@/app/assets/avatars/7.svg"),
-    8: require("@/app/assets/avatars/8.svg"),
+    1: require('@/app/assets/avatars/1.svg'),
+    2: require('@/app/assets/avatars/2.svg'),
+    3: require('@/app/assets/avatars/3.svg'),
+    4: require('@/app/assets/avatars/4.svg'),
+    5: require('@/app/assets/avatars/5.svg'),
+    6: require('@/app/assets/avatars/6.svg'),
+    7: require('@/app/assets/avatars/7.svg'),
+    8: require('@/app/assets/avatars/8.svg'),
 };
 
 function Navbar() {
@@ -28,7 +29,7 @@ function Navbar() {
     const { selectedAvatar, setSelectedAvatar } = useUser();
     const [isSearchOverlayOpen, setIsSearchOverlayOpen] = useState(false);
 
-    const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
+    // const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
     useEffect(() => {
         const fetchUserAvatar = async () => {
@@ -58,7 +59,7 @@ function Navbar() {
         };
     
         fetchUserAvatar();
-    }, []); // Empty array ensures it only runs once on mount    
+    }, [setSelectedAvatar]); // Dependency on setSelectedAvatar ensures it only runs once on mount    
 
     const toggleMenu = () => {
         setIsMenuOpen((prev) => !prev);
@@ -88,9 +89,9 @@ function Navbar() {
             <div className="h-full flex justify-between items-center max-w-[94%] m-auto pr-5">
                 <div className="flex gap-4">
                     <div>
-                        <a href="/">
-                            <Image src={Logo} alt="" width={190} />
-                        </a>
+                        <Link href="/">
+                                <Image src={Logo} alt="" width={190} />
+                        </Link>
                     </div>
                     <NavLinks/>
                 </div>

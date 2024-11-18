@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import Logo from '@/app/assets/logo.png';
 import Image from 'next/image';
+import Link from 'next/link';
 
 function Footer() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -18,9 +19,11 @@ function Footer() {
             <div className="px-5 max-w-[94%] m-auto py-10 pt-14">
                 <div className="py-3 pb-10 flex items-center flex-col">
                     <div>
-                        <a href="/">
-                            <Image src={Logo} alt="" width={190} />
-                        </a>
+                        <Link href="/">
+                            <div>
+                                <Image src={Logo} alt="" width={190} />
+                            </div>
+                        </Link>
                     </div>
                     {!isAuthenticated && (
                         <div className="py-4">
@@ -36,7 +39,7 @@ function Footer() {
                 <div className="flex justify-center py-3">
                     <ul className="flex md:flex-row flex-col text-center gap-5 text-sm">
                         <li>
-                            <a href="/">Home</a>
+                            <Link href="/"><p>Home</p></Link>
                         </li>
                         <li>
                             <a href="/tv-series">TV Series</a>

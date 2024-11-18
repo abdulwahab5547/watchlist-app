@@ -5,6 +5,7 @@ import Footer from "@/app/components/footer";
 import Image from "next/image";
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import Link from "next/link";
 
 interface Movie {
     title?: string;
@@ -57,7 +58,7 @@ function Info() {
         };
 
         fetchMovie();
-    }, [id]);  
+    }, [id, apiKey]);  
 
     return (
         <div>
@@ -68,9 +69,12 @@ function Info() {
                     {movie && (
                         <div className="max-w-[950px]">
                             <div className="pb-5">
-                                <a href="/top-100" className="text-xs hover:text-orange hover:cursor-pointer">
-                                    <span><i className="fa-solid fa-arrow-left pr-2"></i></span>Back to top 100
-                                </a>
+                                <Link href="/top-100" className="text-xs hover:text-orange hover:cursor-pointer">
+                                    <span>
+                                        <i className="fa-solid fa-arrow-left pr-2"></i>
+                                    </span>
+                                    Back to top 100
+                                </Link>
                             </div>
                             <div>
                                 <div className="flex flex-col justify-start items-start md:flex-row md:justify-between md:items-center pb-2">

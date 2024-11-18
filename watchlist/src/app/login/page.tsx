@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import Icon from '../../assets/linkvault-icon.svg';
 import toast from 'react-hot-toast';
 import { useRouter } from 'next/navigation';
 import Popcorn from "@/app/assets/popcorn.png"

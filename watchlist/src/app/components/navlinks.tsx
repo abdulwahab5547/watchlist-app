@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 function NavLinks(){
@@ -6,16 +7,17 @@ function NavLinks(){
         <div className="items-center md:flex hidden">
             <ul className="flex gap-4 text-sm">
                 <li>
-                    <a
-                        href="/"
-                        className={
-                            currentPath === "/"
-                                ? "underline decoration-orange underline-offset-4"
-                                : ""
-                        }
-                    >
-                        Home
-                    </a>
+                    <Link href="/">
+                        <p
+                            className={
+                                currentPath === "/"
+                                    ? "underline decoration-orange underline-offset-4"
+                                    : ""
+                            }
+                        >
+                            Home
+                        </p>
+                    </Link>
                 </li>
                 <li>
                     <a

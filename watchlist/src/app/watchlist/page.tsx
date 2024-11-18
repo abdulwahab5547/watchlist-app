@@ -1,11 +1,9 @@
 "use client"
 
-import Navbar from "../components/navbar";
-import Footer from "../components/footer";
 import Image from "next/image";
 import Link from "next/link";
 import toast from 'react-hot-toast';
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import WatchlistTop from "../components/watchlisttop";
 
 interface TVShow {
@@ -43,14 +41,14 @@ function WatchList() {
     tvShows: [],
   });
 
-  const fetchWatchlist = async () => {
+  const fetchWatchlist = useCallback(async () => {
     try {
       const token = localStorage.getItem("token");
       if (!token) {
         toast("Please log in to view your watchlist.");
         return;
       }
-
+  
       const response = await fetch(`${backendUrl}/api/watchlist`, {
         method: "GET",
         headers: {
@@ -58,20 +56,20 @@ function WatchList() {
           Authorization: `Bearer ${token}`,
         },
       });
-
+  
       if (!response.ok) {
         const errorData = await response.json();
         console.error("Error fetching watchlist:", errorData.message);
         toast.error("Error fetching watchlist!");
         return;
       }
-
+  
       const data = await response.json();
       console.log("Fetched watchlist:", data.watchlist);
-
+  
       const movies = data.watchlist.filter((item: Movie | TVShow) => item.contentType === "movie");
       const tvShows = data.watchlist.filter((item: Movie | TVShow) => item.contentType === "show");
-
+  
       setWatchlist({
         movies: movies as Movie[],
         tvShows: tvShows as TVShow[],
@@ -80,11 +78,11 @@ function WatchList() {
       console.error("Error fetching watchlist:", error);
       toast.error("Error fetching watchlist!");
     }
-  };
-
+  }, [backendUrl, setWatchlist]); // Add dependencies here
+  
   useEffect(() => {
     fetchWatchlist();
-  }, []);
+  }, [fetchWatchlist]);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);

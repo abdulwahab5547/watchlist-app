@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
-import Link from "next/link";
+// import Link from "next/link";
 
 interface Source {
     source: string;
@@ -36,7 +36,7 @@ function Info() {
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
 
-    const apiKey: string = process.env.NEXT_PUBLIC_HOME_API_KEY as string;
+    // const apiKey: string = process.env.NEXT_PUBLIC_HOME_API_KEY as string;
 
     useEffect(() => {
         if (!id) return;

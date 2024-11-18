@@ -45,7 +45,9 @@ function Info() {
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState(true);
 
-    const apiKey: string = process.env.NEXT_PUBLIC_HOME_API_KEY as string;
+    console.log(loading);
+
+    // const apiKey: string = process.env.NEXT_PUBLIC_HOME_API_KEY as string;
 
     useEffect(() => {
         if (!id) return;

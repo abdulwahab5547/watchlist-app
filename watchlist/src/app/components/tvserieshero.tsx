@@ -32,7 +32,7 @@ function HeroSection() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const apiKey: string = process.env.NEXT_PUBLIC_HOME_API_KEY as string;
+  // const apiKey: string = process.env.NEXT_PUBLIC_HOME_API_KEY as string;
   const backendUrl = process.env.NEXT_PUBLIC_BACKEND_URL;
 
   const genreSections = [
@@ -98,7 +98,7 @@ function HeroSection() {
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
+        // const errorData = await response.json();
         toast.error('Error adding to watchlist!');
         return;
       }
