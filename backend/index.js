@@ -72,28 +72,46 @@ app.post('/api/login', async (req, res) => {
 // Watchlist feature
 app.post("/api/watchlist", async (req, res) => {
     try {
-        const token = req.headers.authorization?.split(" ")[1];
-        if (!token) return res.status(401).send({ message: "Unauthorized" });
-
-        // Verify token
-        const decoded = verify(token, process.env.SECRET_KEY);
-        if (!decoded || !decoded.id) return res.status(401).send({ message: "Invalid token" });
-
-        // Find user by ID
-        const user = await User.findById(decoded.id);
-        if (!user) return res.status(404).send({ message: "User not found" });
-
-        // Add movie to watchlist with updated schema
-        const { id, contentType, title, release_date, overview, poster_path, genre } = req.body;
-        user.watchlist.push({ id, contentType, title, release_date, overview, poster_path, genre });
-        await user.save();
-
-        res.status(200).send({ message: "Movie added to watchlist!" });
+      // Extract and verify the token from the Authorization header
+      const token = req.headers.authorization?.split(" ")[1];
+      if (!token) {
+        return res.status(401).json({ message: "Unauthorized" });
+      }
+  
+      const decoded = verify(token, process.env.SECRET_KEY);
+      if (!decoded || !decoded.id) {
+        return res.status(401).json({ message: "Invalid token" });
+      }
+  
+      // Find user by ID
+      const user = await User.findById(decoded.id);
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+  
+      // Extract movie details from the request body
+      const { id, contentType, title, release_date, overview, poster_path, genre } = req.body;
+  
+      if (!id || !contentType || !title) {
+        return res.status(400).json({ message: "Missing required fields" });
+      }
+  
+      // Check if the movie/show already exists in the watchlist
+      const existingItem = user.watchlist.find((item) => item.id === id);
+      if (existingItem) {
+        return res.status(400).json({ message: "Item already exists in watchlist" });
+      }
+  
+      // Add the new item to the watchlist
+      user.watchlist.push({ id, contentType, title, release_date, overview, poster_path, genre });
+      await user.save();
+  
+      res.status(200).json({ message: "Item added to watchlist!" });
     } catch (error) {
-        console.error(error);
-        res.status(500).send({ message: "Server error" });
+      console.error("Error adding to watchlist:", error);
+      res.status(500).json({ message: "Server error" });
     }
-});
+  });  
 
 
 app.get("/api/watchlist", async (req, res) => {
@@ -116,6 +134,50 @@ app.get("/api/watchlist", async (req, res) => {
         res.status(500).send({ message: "Server error" });
     }
 });
+
+// Removing a movie/TV show from watchlist
+
+app.delete("/api/watchlist", async (req, res) => {
+    try {
+      // Extract and verify the token from the Authorization header
+      const token = req.headers.authorization?.split(" ")[1];
+      if (!token) {
+        return res.status(401).json({ message: "Unauthorized" });
+      }
+  
+      const decoded = verify(token, process.env.SECRET_KEY);
+      if (!decoded || !decoded.id) {
+        return res.status(401).json({ message: "Invalid token" });
+      }
+  
+      // Find the user by ID
+      const user = await User.findById(decoded.id);
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+  
+      // Extract item ID and content type from the request body
+      const { id, contentType } = req.body;
+      if (!id || !contentType) {
+        return res.status(400).json({ message: "Invalid request payload" });
+      }
+  
+      // Remove the item from the watchlist by matching `id` and `contentType`
+      user.watchlist = user.watchlist.filter(
+        (item) => !(item.id === Number(id) && item.contentType === contentType)
+      );
+  
+      // Save the updated user document
+      await user.save();
+  
+      res.status(200).json({ message: "Item removed from watchlist" });
+    } catch (error) {
+      console.error("Error removing item from watchlist:", error);
+      res.status(500).json({ message: "Server error" });
+    }
+  });
+  
+  
 
 app.patch('/api/update-avatar', async (req, res) => {
     try {

@@ -18,15 +18,15 @@ const userSchema = new mongoose.Schema(
         },
         watchlist: [
             {
-                id: Number,
-                contentType: String,
-                title: String,
-                release_date: String,
-                overview: String,
-                poster_path: String,
-                genre: [String],
-            }
-        ],
+              id: { type: Number, required: true, unique: true }, // Ensure the id is unique
+              contentType: { type: String, required: true },
+              title: { type: String, required: true },
+              release_date: { type: String },
+              overview: { type: String },
+              poster_path: { type: String },
+              genre: [{ type: String }],
+            },
+          ],
         avatar: Number
     }, 
     { timestamps: true }
