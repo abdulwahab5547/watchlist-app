@@ -62,7 +62,7 @@ function Register(){
     return(
         <div className="text-white">
             <div className="py-16 max-w-[94%] m-auto px-5">
-                <div className="flex md:flex-row flex-col md:gap-5 gap-12 items-center">
+                <div className="flex md:flex-row flex-col flex-col-reverse md:gap-5 gap-12 items-center">
 
                     {/* Left part */}
                     <div className="md:w-[45%]">

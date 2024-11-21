@@ -112,10 +112,9 @@ function HeroSection() {
           {/* Movie Grid */}
           <div className="grid md:grid-cols-8 grid-cols-2 gap-3 relative">
             {section.movies.slice(0, 24).map((movie) => (
-              <div>
+              <div key={movie._id}>
                 <Link href={`/movie-details/${movie._id}`} className="block md:hidden">
                   <div
-                    key={movie._id}
                     className="relative rounded-lg group transition-transform duration-300 hover:scale-110"
                   >
                     <Image
@@ -127,7 +126,7 @@ function HeroSection() {
                     />
                   </div>
                 </Link>
-                <div className="hidden md:block relative rounded-lg group transition-transform duration-300 hover:scale-110">
+                <div key={movie._id} className="hidden md:block relative rounded-lg group transition-transform duration-300 hover:scale-110">
                   <Image
                     src={movie.poster_path}
                     alt="movie poster"
