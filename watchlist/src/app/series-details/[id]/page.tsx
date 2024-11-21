@@ -34,7 +34,7 @@ function Info() {
 
     const [show, setShow] = useState<Show | null>(null);
     const [error, setError] = useState<string | null>(null);
-    const [loading, setLoading] = useState<boolean>(true);
+    // const [loading, setLoading] = useState<boolean>(true);
 
     // const apiKey: string = process.env.NEXT_PUBLIC_HOME_API_KEY as string;
 
@@ -59,7 +59,7 @@ function Info() {
             } catch (err: any) {
                 setError(err.message);
             } finally {
-                setLoading(false);
+                // setLoading(false);
             }
         };
 

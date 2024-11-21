@@ -86,12 +86,12 @@ function Info() {
                     {movie && (
                         <div className="max-w-[950px]">
                             <div className="pb-5">
-                                <a href="/" className="text-xs hover:text-orange hover:cursor-pointer">
+                                <Link href="/" className="text-xs hover:text-orange hover:cursor-pointer">
                                     <span>
                                         <i className="fa-solid fa-arrow-left pr-2"></i>
                                     </span>
                                     Go to homepage
-                                </a>
+                                </Link>
                             </div>
                             <div>
                                 {/* Movie title and release date etc */}
