@@ -132,10 +132,22 @@ function HeroSection() {
 
         <div className="grid md:grid-cols-8 grid-cols-2 gap-3 relative">
           {tvShows.slice(0, 24).map((show) => (
-            <div
-              key={show._id}
-              className="relative rounded-lg group transition-transform duration-300 hover:scale-110"
-            >
+            <div key={show._id}>
+            <Link href={`/series-details/${show._id}`} className="block md:hidden">
+              <div
+                className="relative rounded-lg group transition-transform duration-300 hover:scale-110"
+              >
+                <Image
+                  src={show.poster_path}
+                  alt="TV show poster"
+                  width={300}
+                  height={450}
+                  className="img-fluid rounded-lg transition-opacity duration-300 group-hover:opacity-30"
+                />
+              </div>
+            </Link>
+          
+            <div className="hidden md:block relative rounded-lg group transition-transform duration-300 hover:scale-110">
               <Image
                 src={show.poster_path}
                 alt="TV show poster"
@@ -143,20 +155,21 @@ function HeroSection() {
                 height={450}
                 className="img-fluid rounded-lg transition-opacity duration-300 group-hover:opacity-30"
               />
-
+          
               <div className="absolute inset-0 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="px-6">
                   <Link href={`/series-details/${show._id}`}>
                     <p className="text font-bold text-sm">{show.title}</p>
                   </Link>
-
+          
+                  {/* Display Date Only If Valid */}
                   {formatDate(show.first_aired) && (
                     <p className="text-sm flex items-center pt-4 text-xs">
                       <i className="fa-solid fa-calendar text-orange pr-1"></i>
                       {formatDate(show.first_aired)}
                     </p>
                   )}
-
+          
                   <div className="pt-6">
                     <Link href={`/series-details/${show._id}`}>
                       <div className="hover:text-orange text-sm">
@@ -166,6 +179,7 @@ function HeroSection() {
                     </Link>
                   </div>
                 </div>
+          
                 <div className="absolute top-2 right-2">
                   <i
                     className="fa-regular fa-bookmark text-lightGray hover:text-white text-sm hover:cursor-pointer"
@@ -174,6 +188,7 @@ function HeroSection() {
                 </div>
               </div>
             </div>
+          </div>          
           ))}
         </div>
       </div>
