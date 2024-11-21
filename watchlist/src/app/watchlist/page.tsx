@@ -145,7 +145,7 @@ function WatchList() {
           {/* Movies Section */}
           <div className="py-5">
             <h3 className="font-bold md:text-lg pb-5">Movies</h3>
-            <div className="grid md:grid-cols-8 grid-cols-3 gap-3 relative">
+            <div className="grid md:grid-cols-8 grid-cols-2 gap-3 relative">
               {watchlist.movies.slice(0, 50).reverse().map((movie) => (
                 <div
                   key={movie._id}
@@ -187,7 +187,7 @@ function WatchList() {
           {/* TV Shows Section */}
           <div className="py-5">
             <h3 className="font-bold md:text-lg pb-5">TV Shows</h3>
-            <div className="grid md:grid-cols-8 grid-cols-3 gap-3 relative">
+            <div className="grid md:grid-cols-8 grid-cols-2 gap-3 relative">
               {watchlist.tvShows.slice(0, 50).reverse().map((show) => (
                 <div
                   key={show._id}

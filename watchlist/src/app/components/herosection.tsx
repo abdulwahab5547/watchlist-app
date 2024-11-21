@@ -110,7 +110,7 @@ function HeroSection() {
           </div>
 
           {/* Movie Grid */}
-          <div className="grid md:grid-cols-8 grid-cols-3 gap-3 relative">
+          <div className="grid md:grid-cols-8 grid-cols-2 gap-3 relative">
             {section.movies.slice(0, 24).map((movie) => (
               <div
                 key={movie._id}

@@ -130,7 +130,7 @@ function HeroSection() {
           <h2 className="font-bold text-lg">Featured TV Shows</h2>
         </div>
 
-        <div className="grid md:grid-cols-8 grid-cols-3 gap-3 relative">
+        <div className="grid md:grid-cols-8 grid-cols-2 gap-3 relative">
           {tvShows.slice(0, 24).map((show) => (
             <div
               key={show._id}
