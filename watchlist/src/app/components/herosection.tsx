@@ -126,7 +126,7 @@ function HeroSection() {
                     />
                   </div>
                 </Link>
-                <div key={movie._id} className="hidden md:block relative rounded-lg group transition-transform duration-300 hover:scale-110">
+                <div className="hidden md:block relative rounded-lg group transition-transform duration-300 hover:scale-110">
                   <Image
                     src={movie.poster_path}
                     alt="movie poster"
