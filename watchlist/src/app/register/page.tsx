@@ -62,13 +62,13 @@ function Register(){
     return(
         <div className="text-white">
             <div className="py-16 max-w-[94%] m-auto px-5">
-                <div className="flex md:flex-row flex-col gap-5 items-center">
+                <div className="flex md:flex-row flex-col md:gap-5 gap-12 items-center">
 
                     {/* Left part */}
                     <div className="md:w-[45%]">
                         <div>
-                            <div className="pb-3">
-                                <h2 className="md:text-3xl text-xl font-bold">Sign Up</h2>
+                            <div className="pb-5">
+                                <h2 className="md:text-3xl text-xl font-bold text-center md:text-left">Sign Up</h2>
                             </div>
 
                             <div className="pb-3 text-sm">
@@ -135,9 +135,12 @@ function Register(){
                                         required
                                     />
                                 </div>
-                                <button type="submit" className="bg-orange hover:bg-opacity-80 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                                    Sign up
-                                </button>
+                                <div className='md:block flex justify-center'>
+                                    <button type="submit" className="bg-orange hover:bg-opacity-80 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                                        Sign up
+                                    </button>
+                                </div>
+                                
                             </form>
 
                             

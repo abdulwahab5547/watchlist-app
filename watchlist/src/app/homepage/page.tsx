@@ -8,8 +8,8 @@ function Homepage(){
             <HomeTop/>
             <HeroSection/>
             
-        </div>
+        </div> 
     )
-}
+} 
 
-export default Homepage; 
+export default Homepage;

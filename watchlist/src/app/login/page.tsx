@@ -59,7 +59,7 @@ function Login(){
     return(
         <div className="text-white">
             <div className="py-16 max-w-[94%] m-auto px-5">
-                <div className="flex md:flex-row flex-col gap-5 items-center">
+                <div className="flex md:flex-row flex-col md:gap-5 gap-12 items-center">
 
                     {/* Left part */}
                     <div className="md:w-[55%]">
@@ -69,8 +69,8 @@ function Login(){
                     {/* Right part */}
                     <div className="md:w-[45%]">
                         <div>
-                            <div className="pb-3">
-                                <h2 className="md:text-3xl text-xl font-bold">Login</h2>
+                            <div className="pb-5">
+                                <h2 className="md:text-3xl text-xl font-bold md:text-left text-center">Login</h2>
                             </div>
 
                             <div className="pb-3 text-sm">
@@ -109,9 +109,11 @@ function Login(){
                                         required
                                     />
                                 </div>
-                                <button className="bg-orange hover:bg-opacity-80 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
-                                    Login
-                                </button>
+                                <div className='flex md:block justify-center'>
+                                    <button className="bg-orange hover:bg-opacity-80 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                                        Login
+                                    </button>
+                                </div>
                             </form>
 
                             

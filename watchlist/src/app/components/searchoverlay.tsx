@@ -90,7 +90,7 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ toggleSearchOverlay }) =>
                 {error && <p className="mt-4 text-center text-red-500">{error}</p>}
                 {results.length > 0 && (
                     <div
-                        className="grid md:grid-cols-8 grid-cols-3 gap-3 relative mt-4 py-5 max-h-[400px] overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-300"
+                        className="grid md:grid-cols-8 grid-cols-2 gap-3 relative mt-4 py-5 max-h-[400px] overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-300"
                     >
                         {results.map((movie, index) => (
                             <div
