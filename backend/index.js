@@ -17,7 +17,7 @@ const SECRET_KEY = process.env.SECRET_KEY;
 app.use(json());
 
 app.use(cors({
-    origin: ["https://watchlist-ivory-two.vercel.app/", "http://localhost:3000"],
+    origin: ["https://watchlist-ivory-two.vercel.app", "http://localhost:3000"],
     methods: ['POST', 'GET', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
     credentials: true
 }));
