@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import toast from 'react-hot-toast';
+import SkeletonRow from "./skeletonrow";
 
 interface TVShow {
   title: string;
@@ -119,7 +120,13 @@ function HeroSection() {
     return movies.filter((movie) => movie.genres?.includes(genre));
   };
 
-  if (loading) return <div className="max-w-[94%] m-auto px-4 py-24 text-white">Loading...</div>;
+  if (loading) return <div className="max-w-[94%] m-auto px-4 py-24 text-white">
+    <div>
+      <SkeletonRow/>
+      <SkeletonRow/>
+      <SkeletonRow/>
+    </div>
+  </div>;
   if (error) return <div className="max-w-[94%] m-auto px-4 py-24 text-white">Error: {error}</div>;
 
   return (
@@ -202,48 +209,60 @@ function HeroSection() {
               <h2 className="font-bold text-lg">{section.title}</h2>
             </div>
 
-            <div className="grid md:grid-cols-8 grid-cols-3 gap-3 relative">
+            <div className="grid md:grid-cols-8 grid-cols-2 gap-3 relative">
               {filteredMovies.slice(0, 24).map((movie) => (
-                <div
-                  key={movie._id}
-                  className="relative rounded-lg group transition-transform duration-300 hover:scale-110"
-                >
-                  <Image
-                    src={movie.poster_path}
-                    alt="Movie poster"
-                    width={300}
-                    height={450}
-                    className="img-fluid rounded-lg transition-opacity duration-300 group-hover:opacity-30"
-                  />
-
-                  <div className="absolute inset-0 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="px-6">
-                      <Link href={`/series-details/${movie._id}`}>
-                        <p className="text font-bold text-sm">{movie.title}</p>
-                      </Link>
-
-                      {formatDate(movie.first_aired) && (
-                        <p className="text-sm flex items-center pt-4 text-xs">
-                          <i className="fa-solid fa-calendar text-orange pr-1"></i>
-                          {formatDate(movie.first_aired)}
-                        </p>
-                      )}
-
-                      <div className="pt-6">
-                        <Link href={`/series-details/${movie._id}`}>
-                          <div className="hover:text-orange text-sm">
-                            View Info
-                            <i className="pl-2 fa-solid fa-circle-info"></i>
-                          </div>
-                        </Link>
-                      </div>
+                <div key={movie._id}>
+                  <Link href={`/movie-details/${movie._id}`} className="block md:hidden">
+                    <div className="relative rounded-lg group transition-transform duration-300 hover:scale-110">
+                      <Image
+                        src={movie.poster_path}
+                        alt="Movie poster"
+                        width={300}
+                        height={450}
+                        className="img-fluid rounded-lg transition-opacity duration-300 group-hover:opacity-30"
+                      />
                     </div>
-                    
-                    <div className="absolute top-2 right-2">
-                      <i
-                        className="fa-regular fa-bookmark text-lightGray hover:text-white text-sm hover:cursor-pointer"
-                        onClick={() => handleBookmarkClick(movie)}
-                      ></i>
+                  </Link>
+                
+                  <div className="hidden md:block relative rounded-lg group transition-transform duration-300 hover:scale-110">
+                    <Image
+                      src={movie.poster_path}
+                      alt="Movie poster"
+                      width={300}
+                      height={450}
+                      className="img-fluid rounded-lg transition-opacity duration-300 group-hover:opacity-30"
+                    />
+                
+                    <div className="absolute inset-0 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="px-6">
+                        <Link href={`/movie-details/${movie._id}`}>
+                          <p className="text font-bold text-sm">{movie.title}</p>
+                        </Link>
+                
+                        {/* Display Date Only If Valid */}
+                        {formatDate(movie.first_aired) && (
+                          <p className="text-sm flex items-center pt-4 text-xs">
+                            <i className="fa-solid fa-calendar text-orange pr-1"></i>
+                            {formatDate(movie.first_aired)}
+                          </p>
+                        )}
+                
+                        <div className="pt-6">
+                          <Link href={`/movie-details/${movie._id}`}>
+                            <div className="hover:text-orange text-sm">
+                              View Info
+                              <i className="pl-2 fa-solid fa-circle-info"></i>
+                            </div>
+                          </Link>
+                        </div>
+                      </div>
+                
+                      <div className="absolute top-2 right-2">
+                        <i
+                          className="fa-regular fa-bookmark text-lightGray hover:text-white text-sm hover:cursor-pointer"
+                          onClick={() => handleBookmarkClick(movie)}
+                        ></i>
+                      </div>
                     </div>
                   </div>
                 </div>

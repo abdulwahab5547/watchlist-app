@@ -143,11 +143,12 @@ function WatchList() {
       <div className="max-w-[94%] m-auto text-white pb-16">
         <div className="py-5 px-4">
           {/* Movies Section */}
-          <div className="py-5">
-            <h3 className="font-bold md:text-lg pb-5">Movies</h3>
-            <div className="grid md:grid-cols-8 grid-cols-2 gap-3 relative">
-              {watchlist.movies.slice(0, 50).reverse().map((movie) => (
-                <div
+          {watchlist.movies.length > 0 && (
+            <div className="py-5">
+              <h3 className="font-bold md:text-lg pb-5">Movies</h3>
+              <div className="grid md:grid-cols-8 grid-cols-2 gap-3 relative">
+                {watchlist.movies.slice(0, 50).reverse().map((movie) => (
+                  <div
                   key={movie._id}
                   className="relative rounded-lg group transition-transform duration-300 hover:scale-110"
                 >
@@ -172,65 +173,77 @@ function WatchList() {
                         </Link>
                       </div>
                     </div>
-                    <div className="absolute top-2 right-2">
-                      <i
-                        className="fa-solid fa-bookmark text-lightGray hover:text-white text-sm hover:cursor-pointer"
-                        onClick={() => handleBookmarkClick(movie)}
-                      ></i>
-                    </div>
+                  </div>
+                  {/* Bookmark Icon: Always visible on mobile */}
+                  <div className="absolute top-2 right-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
+                    <i
+                      className="fa-solid fa-bookmark text-lightGray hover:text-white text-3xl hover:cursor-pointer"
+                      onClick={() => handleBookmarkClick(movie)}
+                    ></i>
                   </div>
                 </div>
-              ))}
+                
+                ))}
+              </div>
             </div>
-          </div>
+          )}
 
           {/* TV Shows Section */}
-          <div className="py-5">
-            <h3 className="font-bold md:text-lg pb-5">TV Shows</h3>
-            <div className="grid md:grid-cols-8 grid-cols-2 gap-3 relative">
-              {watchlist.tvShows.slice(0, 50).reverse().map((show) => (
-                <div
-                  key={show._id}
-                  className="relative rounded-lg group transition-transform duration-300 hover:scale-110"
-                >
-                  <Image
-                    src={show.poster_path}
-                    alt="TV show poster"
-                    width={300}
-                    height={450}
-                    className="img-fluid rounded-lg transition-opacity duration-300 group-hover:opacity-30"
-                  />
-                  <div className="absolute inset-0 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <div className="px-6">
-                      <Link href={`/series-details/${show.id}`}>
-                        <p className="text font-bold text-sm">{show.title}</p>
-                      </Link>
-                      {show.first_aired && (
-                        <p className="text-sm flex items-center pt-4 text-xs">
-                          <i className="fa-solid fa-calendar text-orange pr-1"></i>
-                          {formatDate(show.first_aired)}
-                        </p>
-                      )}
-                      <div className="pt-6">
+          {watchlist.tvShows.length > 0 && (
+            <div className="py-5">
+              <h3 className="font-bold md:text-lg pb-5">TV Shows</h3>
+              <div className="grid md:grid-cols-8 grid-cols-2 gap-3 relative">
+                {watchlist.tvShows.slice(0, 50).reverse().map((show) => (
+                  <div
+                    key={show._id}
+                    className="relative rounded-lg group transition-transform duration-300 hover:scale-110"
+                  >
+                    <Image
+                      src={show.poster_path}
+                      alt="TV show poster"
+                      width={300}
+                      height={450}
+                      className="img-fluid rounded-lg transition-opacity duration-300 group-hover:opacity-30"
+                    />
+                    <div className="absolute inset-0 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="px-6">
                         <Link href={`/series-details/${show.id}`}>
-                          <div className="hover:text-orange text-sm">
-                            View Info
-                            <i className="pl-2 fa-solid fa-circle-info"></i>
-                          </div>
+                          <p className="text font-bold text-sm">{show.title}</p>
                         </Link>
+                        {show.first_aired && (
+                          <p className="text-sm flex items-center pt-4 text-xs">
+                            <i className="fa-solid fa-calendar text-orange pr-1"></i>
+                            {formatDate(show.first_aired)}
+                          </p>
+                        )}
+                        <div className="pt-6">
+                          <Link href={`/series-details/${show.id}`}>
+                            <div className="hover:text-orange text-sm">
+                              View Info
+                              <i className="pl-2 fa-solid fa-circle-info"></i>
+                            </div>
+                          </Link>
+                        </div>
+                      </div>
+                      <div className="absolute top-2 right-2">
+                        <i
+                          className="fa-solid fa-bookmark text-lightGray hover:text-white text-sm hover:cursor-pointer"
+                          onClick={() => handleBookmarkClick(show)}
+                        ></i>
                       </div>
                     </div>
-                    <div className="absolute top-2 right-2">
+                    {/* Bookmark Icon: Always visible on mobile */}
+                    <div className="absolute top-2 right-2 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
                       <i
-                        className="fa-solid fa-bookmark text-lightGray hover:text-white text-sm hover:cursor-pointer"
+                        className="fa-solid fa-bookmark text-lightGray hover:text-white text-3xl hover:cursor-pointer"
                         onClick={() => handleBookmarkClick(show)}
                       ></i>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

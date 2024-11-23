@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import SkeletonRow from "./skeletonrow";
 
 interface SearchOverlayProps {
     toggleSearchOverlay: () => void;
@@ -86,65 +87,91 @@ const SearchOverlay: React.FC<SearchOverlayProps> = ({ toggleSearchOverlay }) =>
                     </button>
                 </div>
 
-                {loading && <p className="mt-4 text-center">Loading...</p>}
+                {loading && 
+                  <div className="pt-5">
+                    <SkeletonRow/>
+                  </div>}
                 {error && <p className="mt-4 text-center text-red-500">{error}</p>}
                 {results.length > 0 && (
                     <div
                         className="grid md:grid-cols-8 grid-cols-2 gap-3 relative mt-4 py-5 max-h-[400px] overflow-y-scroll scrollbar-thin scrollbar-thumb-gray-700 scrollbar-track-gray-300"
                     >
                         {results.map((movie, index) => (
-                            <div
-                                key={movie._id || index}
-                                className="relative rounded-lg group transition-transform duration-300 hover:scale-110"
+                            <div key={movie._id || index} onClick={toggleSearchOverlay}>
+                            {/* Mobile Version */}
+                            <Link
+                              href={
+                                movie.contentType === "movie"
+                                  ? `/movie-details/${movie._id}`
+                                  : `/series-details/${movie._id}`
+                              }
+                              className="block md:hidden"
                             >
+                              <div className="relative rounded-lg group transition-transform duration-300 hover:scale-110">
                                 <Image
-                                    src={movie.poster_path || "/placeholder.png"}
-                                    alt="movie poster"
-                                    width={300}
-                                    height={450}
-                                    className="img-fluid rounded-lg transition-opacity duration-300 group-hover:opacity-30"
+                                  src={movie.poster_path || "/placeholder.png"}
+                                  alt="movie poster"
+                                  width={300}
+                                  height={450}
+                                  className="img-fluid rounded-lg transition-opacity duration-300 group-hover:opacity-30"
                                 />
-
-                                <div className="absolute inset-0 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <div className="px-6">
-                                        <Link
-                                            href={
-                                                movie.contentType === "movie"
-                                                    ? `/movie-details/${movie._id}`
-                                                    : `/series-details/${movie._id}`
-                                            }
-                                        >
-                                            <p className="text font-bold text-sm">{movie.title || "Untitled"}</p>
-                                        </Link>
-                                        {movie.release_date && (
-                                            <p className="text-sm flex items-center pt-4 text-xs">
-                                                <i className="fa-solid fa-calendar text-orange pr-1"></i>
-                                                {movie.release_date}
-                                            </p>
-                                        )}
-                                        <div className="pt-6">
-                                            <Link
-                                                href={
-                                                    movie.contentType === "movie"
-                                                        ? `/movie-details/${movie._id}`
-                                                        : `/series-details/${movie._id}`
-                                                }
-                                            >
-                                                <div className="hover:text-orange text-sm">
-                                                    View Info
-                                                    <i className="pl-2 fa-solid fa-circle-info"></i>
-                                                </div>
-                                            </Link>
-                                        </div>
-                                    </div>
-                                    <div className="absolute top-2 right-2">
-                                        <i
-                                            className="fa-regular fa-bookmark text-lightGray hover:text-white text-sm hover:cursor-pointer"
-                                            onClick={() => handleBookmarkClick(movie)}
-                                        ></i>
-                                    </div>
+                              </div>
+                            </Link>
+                          
+                            {/* Desktop Version */}
+                            <div className="hidden md:block relative rounded-lg group transition-transform duration-300 hover:scale-110">
+                              <Image
+                                src={movie.poster_path || "/placeholder.png"}
+                                alt="movie poster"
+                                width={300}
+                                height={450}
+                                className="img-fluid rounded-lg transition-opacity duration-300 group-hover:opacity-30"
+                              />
+                          
+                              <div className="absolute inset-0 flex flex-col justify-center items-center text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                                <div className="px-6">
+                                  <Link
+                                    href={
+                                      movie.contentType === "movie"
+                                        ? `/movie-details/${movie._id}`
+                                        : `/series-details/${movie._id}`
+                                    }
+                                  >
+                                    <p className="text font-bold text-sm">{movie.title || "Untitled"}</p>
+                                  </Link>
+                          
+                                  {movie.release_date && (
+                                    <p className="text-sm flex items-center pt-4 text-xs">
+                                      <i className="fa-solid fa-calendar text-orange pr-1"></i>
+                                      {movie.release_date}
+                                    </p>
+                                  )}
+                          
+                                  <div className="pt-6">
+                                    <Link
+                                      href={
+                                        movie.contentType === "movie"
+                                          ? `/movie-details/${movie._id}`
+                                          : `/series-details/${movie._id}`
+                                      }
+                                    >
+                                      <div className="hover:text-orange text-sm">
+                                        View Info
+                                        <i className="pl-2 fa-solid fa-circle-info"></i>
+                                      </div>
+                                    </Link>
+                                  </div>
                                 </div>
+                          
+                                <div className="absolute top-2 right-2">
+                                  <i
+                                    className="fa-regular fa-bookmark text-lightGray hover:text-white text-sm hover:cursor-pointer"
+                                    onClick={() => handleBookmarkClick(movie)}
+                                  ></i>
+                                </div>
+                              </div>
                             </div>
+                          </div>                          
                         ))}
                     </div>
                 )}

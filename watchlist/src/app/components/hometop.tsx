@@ -1,5 +1,6 @@
 import Image from "next/image";
 import PosterBackground from "@/app/assets/poster-bg3.jpg";
+import Link from "next/link";
 
 function HomeTop() {
   return (
@@ -24,10 +25,12 @@ function HomeTop() {
               <h1 className="text-2xl md:text-6xl font-bold mb-6">
                 One stop for your next movie adventure.
               </h1>
-              <div className="pt-2 w-full">
-                <a href="/random-movie" className="w-full min-w-[200px] max-w-[300px] px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
-                  Random Movie
-                </a>
+              <div className="pt-2 w-full flex justify-center">
+                <Link href="/random-movie">
+                  <p className="w-full min-w-[200px] md:min-w-[300px] px-4 py-2 bg-red-500 text-white rounded hover:bg-red-600">
+                    Random Movie
+                  </p>
+                </Link>
               </div>
               
             </div>

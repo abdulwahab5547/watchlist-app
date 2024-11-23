@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import toast from 'react-hot-toast';
+import SkeletonRow from "./skeletonrow";
 
 interface Movie {
   title: string;
@@ -97,7 +98,14 @@ function HeroSection() {
     return isNaN(date.getTime()) ? null : date.toLocaleDateString(); // Return null if invalid date
   };
 
-  if (loading) return <div className="max-w-[94%] m-auto px-4 py-24">Loading...</div>;
+  if (loading) return <div className="max-w-[94%] m-auto px-4 py-24">
+    <div>
+      <SkeletonRow/>
+      <SkeletonRow/>
+      <SkeletonRow/>
+    </div>
+    
+  </div>;
   if (error) return <div className="max-w-[94%] m-auto px-4 py-24">Error: {error}</div>;
 
   return (
@@ -167,8 +175,6 @@ function HeroSection() {
                   </div>
                 </div>
               </div>
-              
-              
             ))}
           </div>
         </div>

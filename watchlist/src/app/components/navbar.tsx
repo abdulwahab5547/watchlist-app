@@ -125,7 +125,7 @@ function Navbar() {
                         ) : (
                             <a
                                 href="/login"
-                                className="hover:text-orange hover:cursor-pointer"
+                                className="hover:cursor-pointer bg-red-500 hover:bg-red-600 rounded-full py-2 px-4"
                             >
                                 Sign in
                             </a>
