@@ -30,7 +30,7 @@ const RandomMovie: React.FC = () => {
       const response = await fetch("https://movies-api14.p.rapidapi.com/home", {
         method: "GET",
         headers: {
-          "x-rapidapi-key": "8211cb3157msh1b2d13eb9aacc9ap19cf84jsnaf815c61ccd7",
+          "x-rapidapi-key": "a8aca48308msh58e355dc5e8f267p1801b5jsn086f46900d32",
           "x-rapidapi-host": "movies-api14.p.rapidapi.com",
         },
       });

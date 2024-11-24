@@ -104,18 +104,21 @@ function ProfileOverlay({ isVisible, onClose }: ProfileOverlayProps) {
       className={`fixed inset-0 z-50 px-4 flex items-center justify-center transition-opacity duration-300 ${
         isVisible ? "opacity-100 visible" : "opacity-0 invisible"
       }`}
+      onClick={onClose}  // Click outside to close
     >
       {/* Backdrop */}
-      <div className="fixed inset-0 bg-black bg-opacity-60" onClick={onClose}></div>
-
+      <div className="fixed inset-0 bg-black bg-opacity-60"></div>
+  
       {/* Overlay Content */}
-      <div className="relative bg-gray text-white p-6 rounded-lg shadow-lg w-full max-w-md transform transition-transform duration-300">
+      <div
+        className="relative bg-gray text-white p-6 rounded-lg shadow-lg w-full max-w-md transform transition-transform duration-300"
+        onClick={(e) => e.stopPropagation()}  // Prevent internal clicks from closing
+      >
         <div className="pb-6">
-            <p className="text-center">Hi {name} 👋 </p>
-            <div className="max-w-[100px] m-auto pt-2">
-                <hr/>
-            </div>
-            
+          <p className="text-center">Hi {name} 👋 </p>
+          <div className="max-w-[100px] m-auto pt-2">
+            <hr />
+          </div>
         </div>
         <h3 className="pt-2">Select avatar</h3>
         <div className="py-5">
@@ -153,6 +156,7 @@ function ProfileOverlay({ isVisible, onClose }: ProfileOverlayProps) {
       </div>
     </div>
   );
+  
 }
 
 export default ProfileOverlay;
